@@ -1,10 +1,10 @@
 fn main() {
     let input = include_str!("./input1.txt");
-    let output = part1(input);
+    let output = part2(input);
     println!( "{}", output);
 }
 
-fn part1(input: &str) -> i32 {
+fn part2(input: &str) -> i32 {
     let mut v1 = vec![];
     let mut v2 = vec![];
 
@@ -56,7 +56,7 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let result = part1(
+        let result = part2(
 "two1nine
 eightwothree
 abcone2threexyz
