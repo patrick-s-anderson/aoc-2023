@@ -1,3 +1,5 @@
+use std::cmp;
+
 fn main() {
     let input = include_str!("./input1.txt");
     let output = part2(input);
@@ -19,28 +21,25 @@ fn part2(input: &str) -> i32 {
        // println!("{:?}", v);
         //println!( "{}", id);
 
-        let mut red = 1;
-        let mut blue = 1;
-        let mut green = 1;
+        let mut red = 0;
+        let mut blue = 0;
+        let mut green = 0;
 
         for n in 1..v.len()-1 {
             if 0 == n%2 {
                 continue
             }
-            if (v[n].parse::<i32>().unwrap() > 12) & (v[n+1] == "red") {
-                red = 0;
+            if v[n+1] == "red" {
+                red = cmp::max(red, v[n].parse::<i32>().unwrap());
             }
-            if (v[n].parse::<i32>().unwrap() > 13) & (v[n+1] == "green") {
-                green = 0;
+            if v[n+1] == "green" {
+                green = cmp::max(green, v[n].parse::<i32>().unwrap());
             }
-            if (v[n].parse::<i32>().unwrap() > 14) & (v[n+1] == "blue") {
-                blue = 0;
+            if v[n+1] == "blue" {
+                blue = cmp::max(blue, v[n].parse::<i32>().unwrap());
             }
         }
-        if (red == 1) & (blue == 1) & (green == 1) {
-            f += v[0].parse::<i32>().unwrap();
-            println!("{:?}", v);
-        }
+        f += red*blue*green;
     }
     //println!("{}", f);
     f
@@ -58,6 +57,6 @@ Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
 Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
 Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
 Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green");
-        assert_eq!(result, 8);
+        assert_eq!(result, 2286);
     }
 }
